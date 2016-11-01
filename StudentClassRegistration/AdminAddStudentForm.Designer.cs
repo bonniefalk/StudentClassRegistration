@@ -49,6 +49,7 @@
             this.btnInsert = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnGet = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LabelID
@@ -216,11 +217,22 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // btnGet
+            // 
+            this.btnGet.Location = new System.Drawing.Point(159, 13);
+            this.btnGet.Name = "btnGet";
+            this.btnGet.Size = new System.Drawing.Size(82, 26);
+            this.btnGet.TabIndex = 22;
+            this.btnGet.Text = "Get";
+            this.btnGet.UseVisualStyleBackColor = true;
+            this.btnGet.Click += new System.EventHandler(this.btnGet_Click);
+            // 
             // AdminAddStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(973, 634);
+            this.Controls.Add(this.btnGet);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnInsert);
@@ -272,5 +284,6 @@
         private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnGet;
     }
 }

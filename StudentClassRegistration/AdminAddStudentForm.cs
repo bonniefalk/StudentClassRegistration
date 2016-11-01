@@ -26,6 +26,19 @@ namespace StudentClassRegistration
         }
 
 
+        public void setFields(Student stu)
+        {
+            txtBoxFirstName.Text = stu.getFirstName();
+            txtBoxLastName.Text = stu.getLastName();
+            txtBoxStreet.Text = stu.addr.getStreet();
+            txtboxCity.Text = stu.addr.getCity();
+            txtboxState.Text = stu.addr.getState();
+            txtboxZip.Text = stu.addr.getZip().ToString();
+            txtboxEmail.Text = stu.getEmail();
+            txtboxGpa.Text = stu.getGpa().ToString();
+        }
+
+
         private void btnInsert_Click(object sender, EventArgs e)
         {
             //this is to insert another student
@@ -64,6 +77,13 @@ namespace StudentClassRegistration
         {
             //this does not work just was trying 
             Student stu1 = parseStudentFromFields();
+
+        private void btnGet_Click(object sender, EventArgs e)
+        {
+            Student stu = new Student();
+            stu.SelectDB(int.Parse(txtBoxID.Text));
+            setFields(stu);
+        }
 
             stu1.updateDB();
             stu1.display();
