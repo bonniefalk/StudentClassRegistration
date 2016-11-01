@@ -43,40 +43,81 @@ namespace StudentClassRegistration
         {
             //this is to insert another student
             //this works
-            
-            Student stu1;
-            stu1 = parseStudentFromFields();
 
-            stu1.InsertDB();
-            stu1.display();
+            try
+            {
+                Student stu1;
+                stu1 = parseStudentFromFields();
+
+                stu1.InsertDB();
+                stu1.display();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
-        private void btnExit_Click(object sender, EventArgs e)
+
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                //this does not work just was trying 
+                Student stu1 = parseStudentFromFields();
+
+                stu1.updateDB();
+                stu1.display();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         //making a method to extract getting a student from the fields
+        //throws exception if fields aren't all filled in
         Student parseStudentFromFields()
         {
             Student stu1;
             stu1 = new Student();
             stu1.SelectDB(int.Parse(txtBoxID.Text));
-            stu1.setFirstName(txtBoxFirstName.Text);
-            stu1.setLastName(txtBoxLastName.Text);
-            stu1.addr.setStreet(txtBoxStreet.Text);
-            stu1.addr.setCity(txtboxCity.Text);
-            stu1.addr.setState(txtboxState.Text);
-            stu1.addr.setZip(int.Parse(txtboxZip.Text));
-            stu1.setEmail(txtboxEmail.Text);
-            stu1.setGpa(double.Parse(txtboxGpa.Text));
+
+            String fName = getTextBoxValue(txtBoxFirstName);
+            stu1.setFirstName(fName);
+
+            String lName = getTextBoxValue(txtBoxLastName) ;
+            stu1.setLastName(lName);
+
+            String street = getTextBoxValue(txtBoxStreet);
+            stu1.addr.setStreet(street);
+
+            stu1.addr.setCity(getTextBoxValue(txtboxCity));
+
+            stu1.addr.setState(
+                getTextBoxValue(txtboxState)
+            );
+
+
+            int zip= int.Parse(getTextBoxValue(txtboxZip)); 
+            stu1.addr.setZip(zip);
+
+
+            String email = getTextBoxValue(txtboxEmail);
+            stu1.setEmail(email);
+
+            double gpa = double.Parse(getTextBoxValue(txtboxGpa));
+            stu1.setGpa(gpa);
+
+
             return stu1;
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            //this does not work just was trying 
-            Student stu1 = parseStudentFromFields();
+            this.Close();
+        }
 
         private void btnGet_Click(object sender, EventArgs e)
         {
@@ -85,8 +126,18 @@ namespace StudentClassRegistration
             setFields(stu);
         }
 
-            stu1.updateDB();
-            stu1.display();
+        //This'll throw an exception if the field is empty, null, or whitespace
+        //Make sure to souround code using this method with a try catch block
+        String getTextBoxValue(TextBox textBox) 
+        {
+            String text = textBox.Text;
+
+            if (string.IsNullOrWhiteSpace(text)) 
+            {
+                throw new Exception("Fields must contain valid text");
+            }
+
+            return text;
         }
     }
 }
