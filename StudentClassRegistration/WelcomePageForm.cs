@@ -112,15 +112,19 @@ namespace StudentClassRegistration
                 //placeholder code for admin form
                 //make admin form
                 //admin.show();
-                this.Hide();
-            }
-            //else
-           // {
+                //this.Hide();
 
-            // trying to call up the adminAddStudentForm
-            AdminAddStudentForm admin1;
-            admin1 = new AdminAddStudentForm();
-            admin1.Show();
+                // trying to call up the adminAddStudentForm
+                AdminAddStudentForm admin1;
+                admin1 = new AdminAddStudentForm();
+                admin1.Show();
+            }
+            else
+            {
+                MessageBox.Show("Must put admin");
+            }
+
+
             
         }
     }
