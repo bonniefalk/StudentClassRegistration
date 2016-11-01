@@ -23,10 +23,8 @@ namespace StudentClassRegistration
         public AdminAddStudentForm()
         {
             InitializeComponent();
-
         }
 
-          
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
