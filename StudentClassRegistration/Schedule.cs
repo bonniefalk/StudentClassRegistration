@@ -19,27 +19,27 @@ namespace StudentClassRegistration
     public class Schedule
     {
         //properties
-    public    Section[] sched = new Section[10];
+    public    Section[] sections = new Section[10];
     public    int count = 0;
 
 
         //method to add to the schedule
         public void addSection(Section s1)
         {
-            sched[count] = s1;
+            sections[count] = s1;
             count++;
         }
 
         public void dropSection(Section s1)
         {
-            sched[count] = s1;
+            sections[count] = s1;
             count--;
         }
         //display method 
         public void display()
         {
             for (int i = 0; i <= (count - 1); i++) 
-            sched[i].display();
+            sections[i].display();
         }
     }//end class
 }//end name space

@@ -4,6 +4,7 @@
  * this is the code behind the
  * sections design button that is 
  * suppose to be a student schedule
+ * so a student can view their schedule
  * 
  * ****/
 
@@ -21,33 +22,99 @@ namespace StudentClassRegistration
 {
     public partial class Sections : Form
     {
-        Student s1;
-        
+        Student student;
 
-        public Sections()
-       // public Sections(Student s)
+        TextBox[] txtBoxesForCRN;
+        TextBox[] txtBoxesForCourseIDs;
+        TextBox[] txtBoxesForTimeDays;
+        TextBox[] txtBoxesForRoomNbs;
+        TextBox[] txtBoxesForInstructors;
+
+        private  void  initArrays()
         {
-            
-           // s1 = s;
-            InitializeComponent();
+
+            txtBoxesForCRN = new TextBox[5]
+            {
+                txtBoxCrn,
+                txtBox2Crn,
+                txtBox3Crn,
+                txtBox4Crn,
+                txtBox5Crn
+            };
+
+            txtBoxesForCourseIDs = new TextBox[]
+            {
+                txtBoxCourseID,
+                txtBox2CourseID,
+                txtBox3CourseID,
+                txtBox4CourseID,
+                txtBox5CourseID
+            };
+
+            txtBoxesForTimeDays = new TextBox[]
+            {
+                txtBoxTimeDays,
+                txtBox2TimeDays,
+                txtBox3TimeDays,
+                txtBox4TimeDays,
+                txtBox5TimeDays
+            };
+
+
+            txtBoxesForRoomNbs = new TextBox[]
+            {
+                txtBoxRoomNo,
+                txtBox2RoomNo,
+                txtBox3RoomNo,
+                txtBox4RoomNo,
+                txtBox5RoomNo
+            };
+
+            txtBoxesForInstructors = new TextBox[]
+            {               
+                txtBoxInstructor,
+                txtBox2Instructor,
+                txtBox3Instructor,
+                txtBox4Instructor,
+                txtBox5Instructor
+            };
         }
+
+
+        /*public Sections()
+        {
+            InitializeComponent();
+            initArrays();
+        }*/
          
         public Sections(Student s)
         {
-
-            s1 = s;
+            student = s;
             InitializeComponent();
+            initArrays();
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // this does not work yet keeping it for admin if needed!
+
+            // this does not work yet
+           
             Section sec1;
-            string crn;
-            crn = txtBoxAdd.Text;
-            sec1 = new Section(crn);
-            crn = sec1.getCrn();
-            s1.addSection(sec1);
-            s1.InsertDB();//i am getting an error???
+            sec1 = new Section();
+            sec1.SelectDB(txtBoxCrn.Text);
+           // sec1.setCourseID(txtBoxCourseID.Text);
+           // sec1.setTimeDay(txtBoxTimeDays.Text);
+          //  sec1.setRoomNo(txtBoxRoomNo.Text);
+          //  sec1.setInstructor(txtBoxInstructor.Text);
+            txtBoxDrop.Text = sec1.getCrn();
+            txtBoxCrn.Text = sec1.getCrn();
+            txtBoxCourseID.Text = sec1.getCourseID();
+            txtBoxTimeDays.Text = sec1.getTimeDay();
+            txtBoxRoomNo.Text = sec1.getRoomNo();
+            txtBoxInstructor.Text = sec1.getInstructor();
+
+            sec1.InsertDB();
+            sec1.display();
+
 
         }
 
@@ -55,14 +122,16 @@ namespace StudentClassRegistration
         {
             //this wont work because I don't have a delete method
            // keeping it here needs more code 
-            Section sec1;
-            string crn;
-            crn = txtBoxDrop.Text;
-            sec1 = new Section(crn);
-            crn = sec1.getCrn();
+           // Section sec1;
+          //  string crn;
+          //  crn = txtBoxDrop.Text;
+          //  sec1 = new Section(crn);
+          //  crn = sec1.getCrn();
             
         }
 
+        //this allows you to view the student schedule which 
+        //I called section
         private void btnViewInfo_Click(object sender, EventArgs e)
         {
             Section sec1;
@@ -70,7 +139,7 @@ namespace StudentClassRegistration
 
             
             sec1 = new Section();   //initialize object
-            sec1 = s1.sch.sched[0];
+            sec1 = student.getSchedule().sections[0];         //this is from the array in studentSchedule class
             
             sec1.SelectDB(txtBoxCrn.Text);
             crn = sec1.getCrn();
@@ -92,7 +161,7 @@ namespace StudentClassRegistration
             inst = sec1.getInstructor();
             txtBoxInstructor.Text = inst;
 
-            s1.display();
+            student.display();
 
             //Schedule sc1;       //trying to pull up the student schedule in Sections here
             // sc1 = new Schedule();
@@ -105,67 +174,45 @@ namespace StudentClassRegistration
         }
 
         //this is to populate the student schedule of sections
+        //and show up in the text boxes
+        //I only coded the first 2 rows of text boxes so far
 
         private void Sections_Load(object sender, EventArgs e)
         {
-            //first row of text boxes for crn
-            Section sec1;
-            string crn;
+            int i = 0;
+            foreach (Section section in student.getSchedule().sections)
+            {
+                try
+                {
+                    //
+                     TextBox crnBox = txtBoxesForCRN[1];
+                      crnBox.Text = section.getCrn();
 
-            sec1 = new Section();   //initialize object
-            sec1 = s1.sch.sched[0];
+                    //
+                    TextBox courseIDBox = txtBoxesForCourseIDs[i];
+                    courseIDBox.Text = section.getCourseID();
 
-            sec1.SelectDB(txtBoxCrn.Text);
-            crn = sec1.getCrn();
-            txtBoxCrn.Text = crn;
+                    //
+                    TextBox timedaysBox = txtBoxesForTimeDays[i];
+                    txtBoxTimeDays.Text = section.getTimeDay();
 
-            Section sec2;
-            sec2 = new Section();
-            sec2 = s1.sch.sched[1];
+                    //
+                    TextBox roomNbBox = txtBoxesForRoomNbs[i];
+                    string rn = section.getRoomNo();
+                    roomNbBox.Text = rn;
 
-            //trying to populate second row of text boxes for crn
-            sec2.SelectDB(txtBox2Crn.Text);
-            crn = sec2.getCrn();
-            txtBox2Crn.Text = crn;
-
-            //first row of text boxes for course ID
-            string courseid;
-            courseid = sec1.getCourseID();
-            txtBoxCourseID.Text = courseid;
-
-            //2nd row of text boxes for course ID
-            courseid = sec2.getCourseID();
-            txtBox2CourseID.Text = courseid;
-
-            //first row of text boxes for time days
-            string timedays;
-            timedays = sec1.getTimeDay();
-            txtBoxTimeDays.Text = timedays;
-
-            //second row of text boxes for time days
-            timedays = sec2.getTimeDay();
-            txtBox2TimeDays.Text = timedays;
-
-            //first row of text boxes for roomNo
-            string rn;
-            rn = sec1.getRoomNo();
-            txtBoxRoomNo.Text = rn;
-
-            //2nd row of text boxes for roomNo
-            rn = sec2.getRoomNo();
-            txtBox2RoomNo.Text = rn;
-
-            //first row of text boxes for instructor
-            string inst;
-            inst = sec1.getInstructor();
-            txtBoxInstructor.Text = inst;
-
-            //2nd row of text boxes for instructor
-            inst = sec2.getInstructor();
-            txtBox2Instructor.Text = inst;
-
-            s1.display();
- 
+                    //
+                    TextBox instructorBox = txtBoxesForInstructors[i];
+                    string inst = section.getInstructor();
+                    instructorBox.Text = inst;
+                }
+                catch (Exception ex)
+                {
+                }
+                i++;
+            }
+       
+            student.display();
         }
 
         private void btnExit_Click(object sender, EventArgs e)

@@ -50,11 +50,12 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnGet = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LabelID
             // 
-            this.LabelID.Location = new System.Drawing.Point(68, 48);
+            this.LabelID.Location = new System.Drawing.Point(68, 58);
             this.LabelID.Name = "LabelID";
             this.LabelID.Size = new System.Drawing.Size(69, 23);
             this.LabelID.TabIndex = 1;
@@ -62,7 +63,7 @@
             // 
             // txtBoxID
             // 
-            this.txtBoxID.Location = new System.Drawing.Point(143, 45);
+            this.txtBoxID.Location = new System.Drawing.Point(143, 55);
             this.txtBoxID.Name = "txtBoxID";
             this.txtBoxID.Size = new System.Drawing.Size(100, 26);
             this.txtBoxID.TabIndex = 2;
@@ -199,7 +200,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(751, 561);
+            this.btnExit.Location = new System.Drawing.Point(871, 523);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 61);
             this.btnExit.TabIndex = 20;
@@ -221,17 +222,28 @@
             // 
             this.btnGet.Location = new System.Drawing.Point(159, 13);
             this.btnGet.Name = "btnGet";
-            this.btnGet.Size = new System.Drawing.Size(82, 26);
+            this.btnGet.Size = new System.Drawing.Size(82, 36);
             this.btnGet.TabIndex = 22;
             this.btnGet.Text = "Get";
             this.btnGet.UseVisualStyleBackColor = true;
             this.btnGet.Click += new System.EventHandler(this.btnGet_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(740, 523);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(81, 61);
+            this.btnClear.TabIndex = 23;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // AdminAddStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(973, 634);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnGet);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnExit);
@@ -285,5 +297,6 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnGet;
+        private System.Windows.Forms.Button btnClear;
     }
 }

@@ -28,7 +28,7 @@ namespace StudentClassRegistration
 
         private int id;
         private double gpa;
-        public Schedule sch = new Schedule();      //this is for lab 4 adding schedule to student
+        private Schedule sch = new Schedule();      //this is for lab 4 adding schedule to student
 
         //-----------------constructors no aruguments----------------------
 
@@ -77,6 +77,11 @@ namespace StudentClassRegistration
    
     {
         return gpa;
+    }
+
+    public Schedule getSchedule()
+    {
+        return sch;
     }
 
         //---------------method for lab 4  to add a section--------------
@@ -181,7 +186,7 @@ namespace StudentClassRegistration
                 OleDbConnection2.Close();
             }//end finally
 
-            getSchedule();          //for lab 6 building a new method to get the student schedule
+            DBLoadSchedule();          //for lab 6 building a new method to get the student schedule
 
         }//end SelectDB
 
@@ -191,7 +196,7 @@ namespace StudentClassRegistration
         // from the studentSchedule table.
         ********************************/
 
-        public void getSchedule()
+        public void DBLoadSchedule()
         {
             
             cmd = "Select crn From StudentSchedule where StudentID = " + id;         

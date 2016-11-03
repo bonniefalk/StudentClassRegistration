@@ -3,6 +3,7 @@
  * C#2 Lab #8
  * This is the Admin Add Student Page
  * allowing the admin to add a new student
+ * or update a student and or view a student profile
  * 
  * ***/
 
@@ -25,7 +26,7 @@ namespace StudentClassRegistration
             InitializeComponent();
         }
 
-
+        //setting fields for the text boxes
         public void setFields(Student stu)
         {
             txtBoxFirstName.Text = stu.getFirstName();
@@ -59,11 +60,12 @@ namespace StudentClassRegistration
 
         }
 
+        //updating a student info in case you made a mistake
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
-                //this does not work just was trying 
+                
                 Student stu1 = parseStudentFromFields();
 
                 stu1.updateDB();
@@ -92,8 +94,10 @@ namespace StudentClassRegistration
             String street = getTextBoxValue(txtBoxStreet);
             stu1.addr.setStreet(street);
 
+            //Same thing as above but in a shorter way
             stu1.addr.setCity(getTextBoxValue(txtboxCity));
 
+            //Same thing as above but in a shorter way (and spread over several lines)
             stu1.addr.setState(
                 getTextBoxValue(txtboxState)
             );
@@ -113,12 +117,14 @@ namespace StudentClassRegistration
             return stu1;
         }
 
-
+        //this closes the form
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        //this is to view a student
+        //enter a student ID and hit the get box
         private void btnGet_Click(object sender, EventArgs e)
         {
             Student stu = new Student();
@@ -138,6 +144,21 @@ namespace StudentClassRegistration
             }
 
             return text;
+        }
+
+        //to clear the text boxes
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtBoxID.Text = "";
+            txtBoxFirstName.Text = "";
+            txtBoxLastName.Text = "";
+            txtBoxStreet.Text = "";
+            txtboxCity.Text = "";
+            txtboxState.Text = "";
+            txtboxZip.Text = "";
+            txtboxEmail.Text = "";
+            txtboxGpa.Text = "";
+            txtBoxID.Focus();
         }
     }
 }

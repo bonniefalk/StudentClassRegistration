@@ -45,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="AdminAddInstructorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminAddInstructorForm.Designer.cs">
+      <DependentUpon>AdminAddInstructorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminAddStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     <Compile Include="WelcomePageForm.Designer.cs">
       <DependentUpon>WelcomePageForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminAddInstructorForm.resx">
+      <DependentUpon>AdminAddInstructorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminAddStudentForm.resx">
       <DependentUpon>AdminAddStudentForm.cs</DependentUpon>
     </EmbeddedResource>

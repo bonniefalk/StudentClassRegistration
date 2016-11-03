@@ -29,17 +29,7 @@ namespace StudentClassRegistration
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //this was a test don't need any more
-            //this is for admin make a sepearte button and put this in a different button
-           // if (txtBoxID.Text == "admin")
-           // {
-                //we need to create admin forms
-                //placeholder code for admin form
-                //make admin form
-                //admin.show();
-               // this.Hide();
-          //  }
-           // else
+            
             {
 
                 // we need this code to be able to pull from the text boxes
@@ -75,7 +65,6 @@ namespace StudentClassRegistration
                                gui.Show();
                            }*/
 
-
                 //this shows the student profile page 
                 //each page needs a button to go to the next page or page you want
                 StudentProfile st1;
@@ -83,11 +72,7 @@ namespace StudentClassRegistration
                // this.Hide();      // this hides the welcome screen if you leave open can call other id's
                 st1.Show();
                 // st1.Select();       //do we need this ?
-            }
-            
-
-
-            
+            }                  
            
         }
 
@@ -108,15 +93,12 @@ namespace StudentClassRegistration
              //this is for admin make a sepearte button and put this in a different button
             if (txtBoxID.Text == "admin")
             {
-                //we need to create admin forms
-                //placeholder code for admin form
-                //make admin form
-                //admin.show();
-                //this.Hide();
 
+                //this brings up the AdminAddStudentForm
                 // trying to call up the adminAddStudentForm
                 AdminAddStudentForm admin1;
                 admin1 = new AdminAddStudentForm();
+                //this.Hide();      //this will hide the previous page 
                 admin1.Show();
             }
             else
